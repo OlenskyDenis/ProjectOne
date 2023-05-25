@@ -6,6 +6,11 @@ namespace ProjectOne.Data
 {
     public class ProjectOneContext : DbContext
     {
-        public DbSet<Product> Products { get; set; } = null!;
+        public ProjectOneContext(DbContextOptions<ProjectOneContext> options)
+           : base(options)
+        {
+        }
+
+        public DbSet<Product> Product { get; set; }
     }
 }
