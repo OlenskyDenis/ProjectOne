@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using ProjectOne.Data;
+using ProjectOne.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,15 @@ builder.Services.AddDbContext<ProjectOneContext>(options =>
 //end add db connection
 
 var app = builder.Build();
+
+//add seeder
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+
+    SeedData.Initialize(services);
+}
+//end add seeder
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
