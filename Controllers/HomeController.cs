@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ProjectOne.Data;
 using ProjectOne.Models;
 using System.Diagnostics;
 
@@ -6,17 +7,31 @@ namespace ProjectOne.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ProjectOneContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ProjectOneContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var products = _context.Product.ToList();
+            return View(products);
         }
+
+
+        /*       private readonly ILogger<HomeController> _logger;*/
+
+        /*       public HomeController(ILogger<HomeController> logger)
+        {
+            _logger = logger;
+        }*/
+
+  /*      public IActionResult Index()
+        {
+            return View();
+        }*/
 
         public IActionResult Privacy()
         {
