@@ -1,7 +1,15 @@
+using Microsoft.EntityFrameworkCore;
+using ProjectOne.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+//add db connection
+builder.Services.AddDbContext<ProjectOneContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ProjectOneContext")));
+//end add db connection
 
 var app = builder.Build();
 
